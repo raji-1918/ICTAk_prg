@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Students</h2>
+
+{% if session.role == 'librarian' %}
+  <form method="post" action="{{ url_for('add_student') }}" class="row g-2 mb-3">
+    <div class="col"><input class="form-control" name="name" placeholder="Name" required></div>
+    <div class="col"><input class="form-control" name="roll_no" placeholder="Roll No"></div>
+    <div class="col"><input class="form-control" name="course" placeholder="Course"></div>
+    <div class="col"><input class="form-control" name="contact" placeholder="Contact"></div>
+    <div class="col-auto"><button class="btn btn-primary">Add</button></div>
+  </form>
+{% endif %}
+
+<table class="table table-striped">
+  <thead><tr><th>ID</th><th>Name</th><th>Roll No</th><th>Course</th><th>Contact</th></tr></thead>
+  <tbody>
+    {% for s in students %}
+      <tr>
+        <td>{{ s.student_id }}</td>
+        <td>{{ s.name }}</td>
+        <td>{{ s.roll_no }}</td>
+        <td>{{ s.course }}</td>
+        <td>{{ s.contact }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
